@@ -21,6 +21,7 @@ pub fn calc(input: &Vec<Vec<bool>>) -> u32 {
     trees
 }
 
+#[allow(unused_imports)]
 mod tests {
     use std::fs::File;
     use std::io::{BufRead, BufReader};

@@ -30,6 +30,7 @@ fn mult(input: &Vec<Vec<bool>>) -> u64 {
     res
 }
 
+#[allow(unused_imports)]
 mod tests {
     use std::fs::File;
     use std::io::{BufRead, BufReader};
