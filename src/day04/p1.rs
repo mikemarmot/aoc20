@@ -9,8 +9,8 @@ pub fn doit() {
     println!("Result of day04 p1: {}", res);
 }
 
-pub fn calc(input: &Vec<String>) -> u32 {
-    let fields = vec!["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid"];
+pub fn calc(input: &Vec<String>) -> usize {
+    let fields = vec!["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
     let mut pp:Vec<String> = Vec::new();
     let mut count:usize = 0;
     for line in input {
@@ -23,19 +23,33 @@ pub fn calc(input: &Vec<String>) -> u32 {
             count += 1;
         }
     }
+    count = 0;
     for p in &pp {
-        println!("UUU {}", p.trim());
         let dd:Vec<&str> = p.trim().split(" ").collect();
         let mut hh:HashMap<&str, &str> = HashMap::new();
         for d in dd {
-            println!("WWW {}", d);
             let cc:Vec<&str> = d.split(":").collect();
-            println!("VVV {} {}", cc[0], cc[1]);
             hh.insert(cc[0], cc[1]);
         }
-
+        let mut valid = true;
+        for f in &fields {
+            valid = match hh.get(f) {
+                Some(x) =>  validate(f, x),
+                None =>  false
+            };
+            if !valid {
+                break;
+            }
+        }
+        if valid {
+            count += 1;
+        }
     }
-    pp.len() as u32
+    count
+}
+
+fn validate(_n:&str, _val:&str) -> bool {
+    true
 }
 
 mod tests {
