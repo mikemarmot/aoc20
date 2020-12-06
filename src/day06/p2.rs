@@ -13,14 +13,12 @@ pub fn calc(input: &Vec<String>) -> usize {
     let mut pp:Vec<HashSet<char>> = Vec::new();
     let mut count:usize = 0;
     for line in input {
-        if pp.len() < count + 1 {
-            pp.push(HashSet::new());
-        }
         if line.trim().len() > 0 {
-            for c in line.chars() {
-                if c != ' ' {
-                    pp[count].insert(c);
-                }
+            let t:HashSet<char> = line.chars().filter(|&x| x != ' ').collect();
+            if pp.len() < count + 1 {
+                pp.push(t);
+            } else {
+                pp[count] = pp[count].intersection(&t).map(|x| *x).collect();
             }
         } else {
             count += 1;
@@ -49,6 +47,6 @@ mod tests {
             String::from(""),
             String::from("b"),
         ];
-        assert_eq!(super::calc(&input), 11);
+        assert_eq!(super::calc(&input), 6);
     }
 }

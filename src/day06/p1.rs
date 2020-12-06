@@ -17,11 +17,7 @@ pub fn calc(input: &Vec<String>) -> usize {
             pp.push(HashSet::new());
         }
         if line.trim().len() > 0 {
-            for c in line.chars() {
-                if c != ' ' {
-                    pp[count].insert(c);
-                }
-            }
+            line.chars().filter(|&x| x != ' ').for_each(|x| { pp[count].insert(x); });
         } else {
             count += 1;
         }
