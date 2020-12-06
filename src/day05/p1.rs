@@ -9,35 +9,19 @@ pub fn doit() {
 }
 
 pub fn calc(input: &Vec<String>) -> usize {
-    let mut res:usize = 0;
-    for line in input {
-        let r = scalc(line);
-        if r > res {
-            res = r;
-        }
-    }
-    res
+    input.iter().map(|x| scalc(x)).max().unwrap()
 }
 
 fn scalc(input:&str) -> usize {
-    let mut m:u8 = 0;
-    for c in input[..7].chars() {
+    let mut m:usize = 0;
+    for c in input.chars() {
         m = m << 1;
-        match c {
-            'B' => m = m | 1,
-            _ => ()
-        }
+        m = match c {
+            'B' | 'R' =>  m | 1,
+            _ => m,
+        };
     }
-    let mut n:u8 = 0;
-    for c in input[7..].chars() {
-        n = n << 1;
-        match c {
-            'R' => n = n | 1,
-            _ => ()
-        }
-    }
-    let res = m as usize * 8 + n as usize;
-    res as usize
+    m
 }
 
 mod tests {
