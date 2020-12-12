@@ -5,7 +5,7 @@ pub fn doit() {
     let reader = BufReader::new(File::open("data/input_day11.txt").unwrap());
     let input: Vec<Vec<char>> = reader.lines().map(|l| l.unwrap().chars().collect()).collect();
     let res = calc(&input);
-    println!("Result of day11 p1: {}", res);
+    println!("Result of day11 p2: {}", res);
 }
 
 fn calc(data: &Vec<Vec<char>>) -> usize {
